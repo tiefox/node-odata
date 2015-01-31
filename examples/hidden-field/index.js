@@ -7,12 +7,12 @@ odata.resources.register({
     model: {
         name: String,
         password: {
-          type: String,
-          select: false
+            type: String,
+            select: false
         }
     }
 });
 
-odata.listen(3000, function(){
-  console.log('OData services has started, you can visit by http://localhost:3000/odata/users');
+odata.listen(3000, function() {
+    console.log('OData services has started, you can visit by http://localhost:3000/odata/users');
 });

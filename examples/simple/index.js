@@ -10,6 +10,6 @@ odata.resources.register({
     }
 });
 
-odata.listen(3000, function(){
-  console.log('OData services has started, you can visit by http://localhost:3000/odata/books-simple');
+odata.listen(3000, function() {
+    console.log('OData services has started, you can visit by http://localhost:3000/odata/books-simple');
 });

@@ -7,25 +7,25 @@ var odata = require('../../index'),
 odata.set('db', 'mongodb://localhost/odata-test');
 
 var order = {
-  custom: {
-    id: String,
-    name: String
-  },
-  orderItems: [{
-    quantity: Number,
-    product: {
-      id: String,
-      name: String,
-      price: Number
-    }
-  }]
+    custom: {
+        id: String,
+        name: String
+    },
+    orderItems: [{
+        quantity: Number,
+        product: {
+            id: String,
+            name: String,
+            price: Number
+        }
+    }]
 }
 
 odata.resources.register({
-  url: '/orders',
-  model: orderInfo
+    url: '/orders',
+    model: orderInfo
 });
 
-odata.listen(3000, function(){
-  console.log('OData services has started, you can visit by http://localhost:3000/odata/orders');
+odata.listen(3000, function() {
+    console.log('OData services has started, you can visit by http://localhost:3000/odata/orders');
 });
