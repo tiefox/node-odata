@@ -32,7 +32,7 @@ describe("basic CRUD", function() {
             });
         });
         return it("should get one of the resources", function(done) {
-            return request(app).get("/odata/books/" + books[1].id).expect(200).expect('Content-Type', /json/).end(function(err, res) {
+            return request(app).get("/odata/books('" + books[1].id + "')").expect(200).expect('Content-Type', /json/).end(function(err, res) {
                 if (err) {
                     return done(err);
                 }
@@ -68,7 +68,7 @@ describe("basic CRUD", function() {
     describe("PUT:", function() {
         it("should modify resource if it exist", function(done) {
             books[2].title = "I'm a new title";
-            return request(app).put("/odata/books/" + books[2].id).send(books[2]).expect(200).expect('Content-Type', /json/).end(function(err, res) {
+            return request(app).put("/odata/books('" + books[2].id + "')").send(books[2]).expect(200).expect('Content-Type', /json/).end(function(err, res) {
                 if (err) {
                     return done(err);
                 }
@@ -78,31 +78,31 @@ describe("basic CRUD", function() {
             });
         });
         it("should not modify resource if it not exist", function(done) {
-            return request(app).put("/odata/books/000000000000000000000000").send(books[3]).expect(404, done);
+            return request(app).put("/odata/books('000000000000000000000000')").send(books[3]).expect(404, done);
         });
         it("should not modify resource if not use id", function(done) {
             return request(app).put("/odata/books").send(books[4]).expect(404, done);
         });
         return it("should not modify resource if id is a wrong format", function(done) {
-            return request(app).put("/odata/books/put-wrong-id").send(books[5]).expect(404, done);
+            return request(app).put("/odata/books('put-wrong-id')").send(books[5]).expect(404, done);
         });
     });
     return describe("DELETE:", function() {
         it("should delete resource if it exist", function(done) {
-            return request(app).del("/odata/books/" + books[6].id).expect(200, done);
+            return request(app).del("/odata/books('" + books[6].id + "')").expect(200, done);
         });
         it("should not delete resource if it not exist", function(done) {
-            return request(app).del("/odata/books/000000000000000000000001").expect(404, done);
+            return request(app).del("/odata/books('000000000000000000000001')").expect(404, done);
         });
         it("should not delete resource if not use id", function(done) {
             return request(app).del("/odata/books").expect(404, done);
         });
         it("should not delete resource if id is a wrong format", function(done) {
-            return request(app).del("/odata/books/del-wrong-id").expect(404, done);
+            return request(app).del("/odata/books('del-wrong-id')").expect(404, done);
         });
         return it("should not delete a resource twice", function(done) {
-            return request(app).del("/odata/books/" + books[7].id).end(function(err, res) {
-                return request(app).del("/odata/books/" + books[7].id).expect(404, done);
+            return request(app).del("/odata/books('" + books[7].id + "')").end(function(err, res) {
+                return request(app).del("/odata/books('" + books[7].id + "')").expect(404, done);
             });
         });
     });

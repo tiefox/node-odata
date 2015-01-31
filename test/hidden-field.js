@@ -20,7 +20,7 @@ describe("hidden-field", function() {
             if (err) {
                 return done(err);
             }
-            return request(app).get("/odata/users/" + res.body.id).expect(200).end(function(err, res) {
+            return request(app).get("/odata/users('" + res.body.id + "')").expect(200).end(function(err, res) {
                 res.body.should.be.have.property('name');
                 res.body.name.should.be.equal('zack');
                 res.body.should.be.not.have.property('password');
